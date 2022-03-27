@@ -1,11 +1,9 @@
 import org.junit.jupiter.api.*;
-
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import org.assertj.core.api.SoftAssertions;
-
 
 class MainTest {
 
@@ -99,19 +97,20 @@ class TestData {
 
     private String filename = "./suborDat.csv";
     private final String delim = ";";
-    private int ExpectedColsCountFromHeader;
-    private List<String> cols;
-    private int fileLineNumber;
-    private int lineCounter;
+    private List<String> data;
     private SoftAssertions softAssertions;
     private Scanner scanner;
+
+    @BeforeAll
+    void SetUpAll() throws FileNotFoundException {
+        System.setOut(new PrintStream(new File("output-file.txt")));
+    }
 
 
     @BeforeEach
     void SetUp() throws FileNotFoundException {
         scanner = Main.OpenFile(filename);
         Assertions.assertNotEquals(scanner, null);
-        lineCounter = 1;
         softAssertions = new SoftAssertions();
     }
 
@@ -119,86 +118,53 @@ class TestData {
     public void tearDown() {
         softAssertions.assertAll();
         scanner.close();
-//        if (!cols.isEmpty())
-//            cols.clear();
     }
 
     @Test
     void TestColumnsCount() {
-        String line = Main.GetNextLine(scanner);
-        Assertions.assertNotNull(line);
-        ExpectedColsCountFromHeader = Main.ParseLine(line, delim).size();
-        line = Main.GetNextLine(scanner);
-        while (line != null) {
-            cols = Main.ParseLine(line, delim);
-            softAssertions.assertThat(cols.size()).isEqualTo(ExpectedColsCountFromHeader);
-            line = Main.GetNextLine(scanner);
-        }
+        softAssertions.assertThat(Main.GetLinesWithMissingColumnsCount(scanner, delim)).isEqualTo(0);
     }
 
     @Test
     void TestLineNumbers() {
-        String line = Main.GetNextLine(scanner);
-        Main.ParseLine(line, delim).size();
-        line = Main.GetNextLine(scanner);
-        while (line != null) {
-            cols = Main.ParseLine(line, delim);
-            fileLineNumber = Integer.parseInt(cols.get(0));
-            softAssertions.assertThat(lineCounter).isEqualTo(fileLineNumber);
-            if (lineCounter != fileLineNumber)
-                lineCounter = fileLineNumber;
-            line = Main.GetNextLine(scanner);
-            lineCounter++;
-        }
+        softAssertions.assertThat(Main.AreMissingLines(scanner, delim)).isEqualTo(0);
     }
 
     @Test
     void TestQuestionsScale1to7() {
+        Main.GetHeader(scanner, delim);
         String line = Main.GetNextLine(scanner);
-        Main.ParseLine(line, delim).size();
-        line = Main.GetNextLine(scanner);
-        String[] allowed = { "1", "2", "3", "4", "5", "6", "7", "9", "0" };
+        List<String> allowed = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "9", "0");
         int[] questions = {1, 2, 3, 4, 5, 6, 7, 8, 9, 21, 28, 29, 30, 31, 32, 33, 34, 35, 36};
         while (line != null) {
-            cols = Main.ParseLine(line, delim);
-            for (int i = 0; i < questions.length; i++) {
-                if (cols.size() > questions[i])
-                    softAssertions.assertThat(cols.get(questions[i])).containsAnyOf(allowed);
-            }
+            data = Main.ParseLine(line, delim);
+            softAssertions.assertThat(Main.IsAllowedInList(data, allowed, questions)).isTrue();
             line = Main.GetNextLine(scanner);
         }
     }
 
     @Test
     void TestQuestionsScale1to4() {
+        Main.GetHeader(scanner, delim);
         String line = Main.GetNextLine(scanner);
-        Main.ParseLine(line, delim).size();
-        line = Main.GetNextLine(scanner);
-        String[] allowed = {"1", "2", "3", "4", "9", "0" };
+        List<String> allowed = Arrays.asList("1", "2", "3", "4", "9", "0");
         int[] questions = {10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 26, 27};
         while (line != null) {
-            cols = Main.ParseLine(line, delim);
-            for (int i = 0; i < questions.length; i++) {
-                if (cols.size() > questions[i])
-                    softAssertions.assertThat(cols.get(questions[i])).containsAnyOf(allowed);
-            }
+            data = Main.ParseLine(line, delim);
+            softAssertions.assertThat(Main.IsAllowedInList(data, allowed, questions)).isTrue();
             line = Main.GetNextLine(scanner);
         }
     }
 
     @Test
     void TestQuestionsScale1to5() {
+        Main.GetHeader(scanner, delim);
         String line = Main.GetNextLine(scanner);
-        Main.ParseLine(line, delim).size();
-        line = Main.GetNextLine(scanner);
-        String[] allowed = {"1", "2", "3", "4", "5", "9", "0" };
+        List<String> allowed = Arrays.asList("1", "2", "3", "4", "5", "9", "0");
         int[] questions = {22};
         while (line != null) {
-            cols = Main.ParseLine(line, delim);
-            for (int i = 0; i < questions.length; i++) {
-                if (cols.size() > questions[i])
-                    softAssertions.assertThat(cols.get(questions[i])).containsAnyOf(allowed);
-            }
+            data = Main.ParseLine(line, delim);
+            softAssertions.assertThat(Main.IsAllowedInList(data, allowed, questions)).isTrue();
             line = Main.GetNextLine(scanner);
         }
     }
