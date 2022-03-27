@@ -8,7 +8,7 @@ public class Main {
     public static int toInteger(String str) {
         final int FAIL = -9999;
         int result = 0;
-        if (str.equals(""))
+        if (str == null || str.equals(""))
             return FAIL;
 
 

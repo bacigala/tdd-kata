@@ -61,6 +61,7 @@ class MainTest {
         assert(Main.toInteger("XCX") == FAIL);
         assert(Main.toInteger("IXI") == FAIL);
         assert(Main.toInteger("XV") == 15);
+        assert(Main.toInteger(null) == FAIL);
     }
 
 }
