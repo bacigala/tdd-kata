@@ -4,7 +4,33 @@ import java.util.*;
 
 public class Main {
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) {
+        
+
+    }
+
+    public static boolean IsAllowedInList(List<String> data, List<String> allowed, int[] columns) {
+        boolean isAllowed = true;
+        for (int i = 0; i < columns.length; i++) {
+            if (ContainsEnougthColumns(data, columns[i])) {
+                if (!allowed.contains(data.get(columns[i]))){
+                    isAllowed = false;
+                    System.out.println("Value " + data.get(columns[i]) + " is not allowed");
+                }
+            }
+            else {
+                System.out.println("Not enough columns");
+                return false;
+            }
+        }
+        return isAllowed;
+    }
+
+    public static boolean ContainsEnougthColumns(List<String> data, int column) {
+        if (data.size() > column && column >= 0)
+            return true;
+        else
+            return false;
     }
 
     public static List<String> ParseLine(String line, String delim) {

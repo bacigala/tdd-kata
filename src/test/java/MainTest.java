@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.*;
 
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import org.assertj.core.api.SoftAssertions;
@@ -47,6 +48,49 @@ class MainTest {
 
         List<String> tokens = Main.ParseLine(line, delim);
         Assertions.assertEquals(colsCount, tokens.size());
+    }
+
+    @Test
+    void TestConatainsEnoughtColumns()
+    {
+        List<String> data = Arrays.asList(new String[]{});
+        Assertions.assertFalse(Main.ContainsEnougthColumns(data, 0));
+        data = Arrays.asList(new String[]{"", ""});
+        Assertions.assertFalse(Main.ContainsEnougthColumns(data, -1));
+        data = Arrays.asList(new String[]{"abc", "ced"});
+        Assertions.assertFalse(Main.ContainsEnougthColumns(data, -1));
+        data = Arrays.asList(new String[]{"abc", "ced"});
+        Assertions.assertFalse(Main.ContainsEnougthColumns(data, 5));
+        Assertions.assertTrue(Main.ContainsEnougthColumns(data, 0));
+        Assertions.assertTrue(Main.ContainsEnougthColumns(data, 1));
+    }
+
+    @Test
+    void TestIsAllowedInList()
+    {
+        List<String> data = Arrays.asList(new String[]{"1", "2", "3"});
+        List<String> allowed = Arrays.asList(new String[]{"1", "2", "3"});
+        int cols[] = {0, 1, 2};
+        int falseCols[] = {3};
+        Assertions.assertTrue(Main.IsAllowedInList(data, allowed, cols));
+        Assertions.assertFalse(Main.IsAllowedInList(data, allowed, falseCols));
+    }
+
+    @Test
+    void TestIsNotAllowedInList1()
+    {
+        List<String> data = Arrays.asList(new String[]{"1", "2", "3", "4"});
+        List<String> allowed = Arrays.asList(new String[]{"1", "2", "3"});
+        int cols[] = {0, 1, 2, 3};
+        Assertions.assertFalse(Main.IsAllowedInList(data, allowed, cols));
+    }
+    @Test
+    void TestIsNotAllowedInList2()
+    {
+        List<String> data = Arrays.asList(new String[]{"1", "2", "3", "4"});
+        List<String> allowed = Arrays.asList(new String[]{"5", "6", "7"});
+        int cols[] = {0};
+        Assertions.assertFalse(Main.IsAllowedInList(data, allowed, cols));
     }
 }
 
