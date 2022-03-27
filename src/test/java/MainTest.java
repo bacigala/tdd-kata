@@ -1,13 +1,9 @@
-import org.junit.After;
 import org.junit.jupiter.api.*;
 
 import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Scanner;
 import org.assertj.core.api.SoftAssertions;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 
 class MainTest {
