@@ -8,6 +8,12 @@ public class Main {
 
     }
 
+    public static String ReadLine(Scanner reader){
+        if (reader.hasNextLine())
+            return reader.nextLine();
+        return null;
+    }
+
     public static Scanner OpenFile(String filename) throws FileNotFoundException {
         try {
             File myObj = new File(filename);

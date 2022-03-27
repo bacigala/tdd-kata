@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -17,6 +18,15 @@ class MainTest {
             Scanner obj = Main.OpenFile("./suborDat.csv");
             Assertions.assertTrue(obj instanceof Scanner);
         });
+    }
+
+    @Test
+    void ReadLineTest() throws FileNotFoundException {
+        Scanner obj = Main.OpenFile("./suborDat.csv");
+        Assertions.assertTrue(obj instanceof Scanner);
+        String line = Main.ReadLine(obj);
+        Assertions.assertNotNull(line);
+        Assertions.assertTrue(line instanceof String);
     }
 
 }
