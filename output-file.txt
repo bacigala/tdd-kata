@@ -8,8 +8,6 @@ Line: 929. Value <> at column 17 is not allowed
 Line: 929. Value <> at column 18 is not allowed
 Line: 929. Value <> at column 19 is not allowed
 Line: 1137. Value <6> at column 27 is not allowed
-Line: .Accessing value at column:10, but line has only 1 columns
-Line: .Accessing value at column:22, but line has only 1 columns
 Line: 162. Value <x> at column 4 is not allowed
 Line: 170. Value <-1> at column 3 is not allowed
 Line: 328. Value <> at column 1 is not allowed
@@ -17,7 +15,6 @@ Line: 643. Value <7s> at column 36 is not allowed
 Line: 653. Value <8> at column 9 is not allowed
 Line: 788.Accessing value at column:28, but line has only 27 columns
 Line: 954. Value <7.> at column 36 is not allowed
-Line: .Accessing value at column:1, but line has only 1 columns
 Missing columns at line: 788
 Trailing columns at line: 999
 Missing columns at line: 1157

@@ -77,7 +77,8 @@ public class Main {
                 }
             }
             else {
-                System.out.println("Line: " + data.get(0) + ".Accessing value at column:" + columns[i] + ", but line has only " +
+                if (!data.get(0).isBlank())
+                    System.out.println("Line: " + data.get(0) + ".Accessing value at column:" + columns[i] + ", but line has only " +
                         data.size() + " columns");
                 return false;
             }
@@ -86,7 +87,7 @@ public class Main {
     }
 
     public static boolean ContainsEnougthColumns(List<String> data, int column) {
-        if (data.size() > column && column >= 0)
+        if ((data.size() > column) && (column >= 0))
             return true;
         else
             return false;
