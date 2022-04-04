@@ -1,9 +1,18 @@
+import java.lang.Math;
+
 public class Roman {
-    public int decimal;
-    public String roman;
-    public Roman(String roman, int decimal)
+    public int base;
+    public int exponent;
+    public String romanForm;
+    public Roman(String romanForm, int base, int exponent)
     {
-        this.roman = roman;
-        this.decimal = decimal;
+        this.romanForm = romanForm;
+        this.base = base;
+        this.exponent = exponent;
+    }
+
+    public int GetIntegerForm()
+    {
+        return base * (int)Math.pow(10, exponent);
     }
 }

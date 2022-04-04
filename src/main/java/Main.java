@@ -5,19 +5,34 @@ public class Main {
         Main m = new Main();
         System.out.println(m.RomanToDecimal("I"));
     }
-    private Roman thousand = new Roman("M", 1000);
-    private Roman hundred = new Roman("C", 100);
-    private Roman ten = new Roman("X", 10);
-    private Roman one = new Roman("I", 1);
+    private Roman thousand = new Roman("M", 1, 3);
+    private Roman hundred = new Roman("C", 1, 2);
+    private Roman ten = new Roman("X", 1, 1);
+    private Roman one = new Roman("I", 1, 0);
     private String romanInput;
 
-    public int MCXItoDecimal(String roman, int decimal) {
+    public int MCXItoDecimal(Roman romanNumber) {
         int result = 0;
         for (int i = 0; i < 3; i++) {
-            if (romanInput.startsWith(roman)) {
-                result += decimal;
+            if (romanInput.startsWith(romanNumber.romanForm)) {
+                result += romanNumber.GetIntegerForm();
                 romanInput = romanInput.substring(1);
             }
+        }
+        return result;
+    }
+
+    public int Blah2(int order) {
+        int result = 0;
+        if (romanInput.startsWith("D")) {
+            romanInput = romanInput.substring(1);
+            result += 5 * order;
+        } else if (romanInput.startsWith("CM")) {
+            romanInput = romanInput.substring(2);
+            result += 9 * order;
+        } else if (romanInput.startsWith("CD")) {
+            romanInput = romanInput.substring(2);
+            result += 4 * order;
         }
         return result;
     }
@@ -29,21 +44,12 @@ public class Main {
         if (romanInput == null || romanInput.equals(""))
             return FAIL;
 
-        result += MCXItoDecimal(thousand.roman, thousand.decimal);
+        result += MCXItoDecimal(thousand);
 
-        if (romanInput.startsWith("D")) {
-            romanInput = romanInput.substring(1);
-            result += 500;
-        } else if (romanInput.startsWith("CM")) {
-            romanInput = romanInput.substring(2);
-            result += 900;
-        } else if (romanInput.startsWith("CD")) {
-            romanInput = romanInput.substring(2);
-            result += 400;
-        }
+        result += Blah2(100);
 
         if (result % 500 == 0) {
-            result += MCXItoDecimal(hundred.roman, hundred.decimal);
+            result += MCXItoDecimal(hundred);
         }
 
 
@@ -58,7 +64,7 @@ public class Main {
             result += 40;
         }
         if (result % 50 == 0) {
-            result += MCXItoDecimal(ten.roman, ten.decimal);
+            result += MCXItoDecimal(ten);
         }
 
         if (romanInput.startsWith("IX")) {
@@ -82,7 +88,7 @@ public class Main {
             romanInput = romanInput.substring(1);
         }
 
-        result += MCXItoDecimal(one.roman, one.decimal);
+        result += MCXItoDecimal(one);
 
         if (romanInput.length() > 0) {
             return FAIL;
