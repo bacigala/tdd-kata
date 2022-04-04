@@ -41,41 +41,24 @@ public class Main {
         return result;
     }
 
-    public int Five(Roman roman) {
+    public int Nines(Roman roman) {
         int result = 0;
         if (romanInput.startsWith(roman.romanForm)) {
-            romanInput = romanInput.substring(1);
+            romanInput = romanInput.substring(roman.romanForm.length());
             result += roman.GetIntegerForm();
         }
         return result;
     }
 
-    public int Nine(Roman roman) {
-        int result = 0;
-        if (romanInput.startsWith(roman.romanForm)) {
-            romanInput = romanInput.substring(2);
-            result += roman.GetIntegerForm();
-        }
-        return result;
-    }
-
-    public int Four(Roman roman) {
-        int result = 0;
-        if (romanInput.startsWith(roman.romanForm)) {
-            romanInput = romanInput.substring(2);
-            result += roman.GetIntegerForm();
-        }
-        return result;
-    }
 
     public int Blah2(Roman[] inArr) {
-        int result = Five(inArr[2]);
+        int result = Nines(inArr[2]);
         if (result != 0)
             return result;
-        result = Nine(inArr[3]);
+        result = Nines(inArr[3]);
         if (result != 0)
             return result;
-        return Four(inArr[1]);
+        return Nines(inArr[1]);
     }
 
     public int RomanToDecimal(String str) {
@@ -100,7 +83,6 @@ public class Main {
         }
 
         result += Blah2(ones);
-
 
         if (result % 5 == 0)
             result += MCXItoDecimal(ones[0]);
