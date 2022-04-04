@@ -10,9 +10,11 @@ public class Main {
     private Roman ten = new Roman("X", 1, 1);
     private Roman one = new Roman("I", 1, 0);
 
-    private Roman nineHundreds = new Roman("CM", 9, 2);
-    private Roman fiveHundreds = new Roman("D", 5, 2);
-    private Roman fourHundreds = new Roman("CD", 4, 2);
+    private Roman hundreds[] = {
+        new Roman("CM", 9, 2),
+        new Roman("D", 5, 2),
+        new Roman("CD", 4, 2),
+    };
 
     private String romanInput;
 
@@ -54,14 +56,14 @@ public class Main {
         return result;
     }
 
-    public int Blah2() {
-        int result = Five(fiveHundreds);
+    public int Blah2(Roman[] inArr) {
+        int result = Five(inArr[1]);
         if (result != 0)
             return result;
-        result = Nine(nineHundreds);
+        result = Nine(inArr[0]);
         if (result != 0)
             return result;
-        return Four(fourHundreds);
+        return Four(inArr[2]);
     }
 
     public int RomanToDecimal(String str) {
@@ -73,7 +75,7 @@ public class Main {
 
         result += MCXItoDecimal(thousand);
 
-        result += Blah2();
+        result += Blah2(hundreds);
 
         if (result % 500 == 0) {
             result += MCXItoDecimal(hundred);
