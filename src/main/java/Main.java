@@ -8,13 +8,13 @@ public class Main {
 
     private String romanInput;
 
-    private final int IndexOne = 0;
+    private final int IndexBaseOne = 0;
     private final int One = 1;
-    private final int IndexFour = 1;
+    private final int IndexBaseFour = 1;
     private final int Four = 4;
-    private final int IndexFive = 2;
+    private final int IndexBaseFive = 2;
     private final int Five = 5;
-    private final int IndexNine = 3;
+    private final int IndexBaseNine = 3;
     private final int Nine = 9;
 
     private Roman thousand = new Roman("M", 1, 3);
@@ -48,13 +48,11 @@ public class Main {
             tens[i].exponent = 1;
             ones[i].exponent = 0;
         }
-        hundreds[IndexOne].base = tens[IndexOne].base = ones[IndexOne].base = One;
-        hundreds[IndexFour].base = tens[IndexFour].base = ones[IndexFour].base = Four;
-        hundreds[IndexFive].base = tens[IndexFive].base = ones[IndexFive].base = Five;
-        hundreds[IndexNine].base = tens[IndexNine].base = ones[IndexNine].base = Nine;
+        hundreds[IndexBaseOne].base = tens[IndexBaseOne].base = ones[IndexBaseOne].base = One;
+        hundreds[IndexBaseFour].base = tens[IndexBaseFour].base = ones[IndexBaseFour].base = Four;
+        hundreds[IndexBaseFive].base = tens[IndexBaseFive].base = ones[IndexBaseFive].base = Five;
+        hundreds[IndexBaseNine].base = tens[IndexBaseNine].base = ones[IndexBaseNine].base = Nine;
     }
-
-
 
     public int GetRepeatableValue(Roman romanNumber) {
         int result = 0;
@@ -77,17 +75,17 @@ public class Main {
 
     public int GetNonRepeatableValue(Roman[] inArr) {
         int result = 0;
-        if ((result = GetFourFiveNineInt(inArr[IndexFive])) != 0)
+        if ((result = GetFourFiveNineInt(inArr[IndexBaseFive])) != 0)
             return result;
-        if ((result = GetFourFiveNineInt(inArr[IndexNine])) != 0)
+        if ((result = GetFourFiveNineInt(inArr[IndexBaseNine])) != 0)
             return result;
-        return GetFourFiveNineInt(inArr[IndexFour]);
+        return GetFourFiveNineInt(inArr[IndexBaseFour]);
     }
 
     public int AddSumOfRepeatableAndNonRepeatable(Roman[] inArr, int res){
         res += GetNonRepeatableValue(inArr);
-        if (res % inArr[IndexFive].GetIntegerForm() == 0) {
-            res += GetRepeatableValue(inArr[IndexOne]);
+        if (res % inArr[IndexBaseFive].GetIntegerForm() == 0) {
+            res += GetRepeatableValue(inArr[IndexBaseOne]);
         }
         return res;
     }

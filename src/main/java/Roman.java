@@ -14,7 +14,6 @@ public class Roman {
         this.base = base;
         this.exponent = exponent;
     }
-
     public int GetIntegerForm()
     {
         return base * (int)Math.pow(10, exponent);
