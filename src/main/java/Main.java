@@ -59,7 +59,7 @@ public class Main {
         for (int i = 0; i < 3; i++) {
             if (romanInput.startsWith(romanNumber.symbol)) {
                 result += romanNumber.GetIntegerForm();
-                romanInput = romanInput.substring(1);
+                romanInput = romanInput.substring(romanNumber.symbol.length());
             }
         }
         return result;
