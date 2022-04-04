@@ -6,8 +6,6 @@ public class Main {
         System.out.println(m.RomanToDecimal("I"));
     }
     private Roman thousand = new Roman("M", 1, 3);
-    private Roman ten = new Roman("X", 1, 1);
-    private Roman one = new Roman("I", 1, 0);
 
     private Roman hundreds[] = {
             new Roman("C", 1, 2),
@@ -98,14 +96,14 @@ public class Main {
         result += Blah2(tens);
 
         if (result % 50 == 0) {
-            result += MCXItoDecimal(ten);
+            result += MCXItoDecimal(tens[0]);
         }
 
         result += Blah2(ones);
 
 
         if (result % 5 == 0)
-            result += MCXItoDecimal(one);
+            result += MCXItoDecimal(ones[0]);
 
         if (romanInput.length() > 0) {
             return FAIL;
