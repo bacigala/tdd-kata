@@ -28,6 +28,10 @@ public class Main {
             new Roman("IX", 9, 0),
     };
 
+    private int IndexFour = 1;
+    private int IndexFive = 2;
+    private int IndexNine = 3;
+
     private String romanInput;
 
     public int MCXItoDecimal(Roman romanNumber) {
@@ -41,7 +45,7 @@ public class Main {
         return result;
     }
 
-    public int Nines(Roman roman) {
+    public int GetFourFiveNineInt(Roman roman) {
         int result = 0;
         if (romanInput.startsWith(roman.romanForm)) {
             romanInput = romanInput.substring(roman.romanForm.length());
@@ -50,15 +54,14 @@ public class Main {
         return result;
     }
 
-
     public int Blah2(Roman[] inArr) {
-        int result = Nines(inArr[2]);
+        int result = GetFourFiveNineInt(inArr[IndexFive]);
         if (result != 0)
             return result;
-        result = Nines(inArr[3]);
+        result = GetFourFiveNineInt(inArr[IndexNine]);
         if (result != 0)
             return result;
-        return Nines(inArr[1]);
+        return GetFourFiveNineInt(inArr[IndexFour]);
     }
 
     public int RomanToDecimal(String str) {
