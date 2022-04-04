@@ -27,42 +27,41 @@ public class Main {
         return result;
     }
 
-    public int Five() {
+    public int Five(Roman roman) {
         int result = 0;
-        if (romanInput.startsWith(fiveHundreds.romanForm)) {
+        if (romanInput.startsWith(roman.romanForm)) {
             romanInput = romanInput.substring(1);
-            result += fiveHundreds.GetIntegerForm();
+            result += roman.GetIntegerForm();
         }
         return result;
     }
 
-    public int Nine() {
+    public int Nine(Roman roman) {
         int result = 0;
-        if (romanInput.startsWith(nineHundreds.romanForm)) {
+        if (romanInput.startsWith(roman.romanForm)) {
             romanInput = romanInput.substring(2);
-            result += nineHundreds.GetIntegerForm();
+            result += roman.GetIntegerForm();
         }
         return result;
     }
 
-    public int Four() {
+    public int Four(Roman roman) {
         int result = 0;
-        if (romanInput.startsWith(fourHundreds.romanForm)) {
+        if (romanInput.startsWith(roman.romanForm)) {
             romanInput = romanInput.substring(2);
-            result += fourHundreds.GetIntegerForm();
+            result += roman.GetIntegerForm();
         }
         return result;
     }
 
     public int Blah2() {
-        int result = Five();
+        int result = Five(fiveHundreds);
         if (result != 0)
             return result;
-
-        result = Nine();
+        result = Nine(nineHundreds);
         if (result != 0)
             return result;
-        return Four();
+        return Four(fourHundreds);
     }
 
     public int RomanToDecimal(String str) {
