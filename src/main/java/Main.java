@@ -28,6 +28,7 @@ public class Main {
             new Roman("IX", 9, 0),
     };
 
+    private int IndexOne = 0;
     private int IndexFour = 1;
     private int IndexFive = 2;
     private int IndexNine = 3;
@@ -55,11 +56,10 @@ public class Main {
     }
 
     public int Blah2(Roman[] inArr) {
-        int result = GetFourFiveNineInt(inArr[IndexFive]);
-        if (result != 0)
+        int result = 0;
+        if ((result = GetFourFiveNineInt(inArr[IndexFive])) != 0)
             return result;
-        result = GetFourFiveNineInt(inArr[IndexNine]);
-        if (result != 0)
+        if ((result = GetFourFiveNineInt(inArr[IndexNine])) != 0)
             return result;
         return GetFourFiveNineInt(inArr[IndexFour]);
     }
@@ -76,19 +76,19 @@ public class Main {
         result += Blah2(hundreds);
 
         if (result % 500 == 0) {
-            result += MCXItoDecimal(hundreds[0]);
+            result += MCXItoDecimal(hundreds[IndexOne]);
         }
 
         result += Blah2(tens);
 
         if (result % 50 == 0) {
-            result += MCXItoDecimal(tens[0]);
+            result += MCXItoDecimal(tens[IndexOne]);
         }
 
         result += Blah2(ones);
 
         if (result % 5 == 0)
-            result += MCXItoDecimal(ones[0]);
+            result += MCXItoDecimal(ones[IndexOne]);
 
         if (romanInput.length() > 0) {
             return FAIL;
