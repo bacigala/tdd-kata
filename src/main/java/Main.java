@@ -6,6 +6,9 @@ public class Main {
         System.out.println(m.RomanToDecimal("I"));
     }
     private Roman thousand = new Roman("M", 1000);
+    private Roman hundred = new Roman("C", 100);
+    private Roman ten = new Roman("X", 10);
+    private Roman one = new Roman("I", 1);
     private String romanInput;
 
     public int Blah(String roman, int decimal) {
@@ -27,12 +30,6 @@ public class Main {
             return FAIL;
 
         result += Blah(thousand.roman, thousand.decimal);
-//        for (int i = 0; i < 3; i++) {
-//            if (romanInput.startsWith("M")) {
-//                result += 1000;
-//                romanInput = romanInput.substring(1);
-//            }
-//        }
 
         if (romanInput.startsWith("D")) {
             romanInput = romanInput.substring(1);
@@ -46,12 +43,7 @@ public class Main {
         }
 
         if (result % 500 == 0) {
-            for (int i = 0; i < 3; i++) {
-                if (romanInput.startsWith("C")) {
-                    result += 100;
-                    romanInput = romanInput.substring(1);
-                }
-            }
+            result += Blah(hundred.roman, hundred.decimal);
         }
 
 
@@ -65,13 +57,8 @@ public class Main {
             romanInput = romanInput.substring(2);
             result += 40;
         }
-        if (result % 50 == 0){
-            for (int i = 0; i < 3; i++) {
-                if (romanInput.startsWith("X")) {
-                    result += 10;
-                    romanInput = romanInput.substring(1);
-                }
-            }
+        if (result % 50 == 0) {
+            result += Blah(ten.roman, ten.decimal);
         }
 
         if (romanInput.startsWith("IX")) {
@@ -95,12 +82,7 @@ public class Main {
             romanInput = romanInput.substring(1);
         }
 
-        for (int i = 0; i < 3; i++) {
-            if (romanInput.startsWith("I")) {
-                result++;
-                romanInput = romanInput.substring(1);
-            }
-        }
+        result += Blah(one.roman, one.decimal);
 
         if (romanInput.length() > 0) {
             return FAIL;
