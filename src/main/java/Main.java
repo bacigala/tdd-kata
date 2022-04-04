@@ -5,35 +5,56 @@ public class Main {
         Main m = new Main();
         System.out.println(m.RomanToDecimal("I"));
     }
+
+    private String romanInput;
+
+    private final int IndexOne = 0;
+    private final int One = 1;
+    private final int IndexFour = 1;
+    private final int Four = 4;
+    private final int IndexFive = 2;
+    private final int Five = 5;
+    private final int IndexNine = 3;
+    private final int Nine = 9;
+
     private Roman thousand = new Roman("M", 1, 3);
 
     private Roman hundreds[] = {
-            new Roman("C", 1, 2),
-            new Roman("CD", 4, 2),
-            new Roman("D", 5, 2),
-            new Roman("CM", 9, 2),
+            new Roman("C"),
+            new Roman("CD"),
+            new Roman("D"),
+            new Roman("CM"),
     };
 
     private Roman tens[] = {
-            new Roman("X", 1, 1),
-            new Roman("XL", 4, 1),
-            new Roman("L", 5, 1),
-            new Roman("XC", 9, 1),
+            new Roman("X"),
+            new Roman("XL"),
+            new Roman("L"),
+            new Roman("XC"),
     };
 
     private Roman ones[] = {
-            new Roman("I", 1, 0),
-            new Roman("IV", 4, 0),
-            new Roman("V", 5, 0),
-            new Roman("IX", 9, 0),
+            new Roman("I"),
+            new Roman("IV"),
+            new Roman("V"),
+            new Roman("IX"),
     };
 
-    private int IndexOne = 0;
-    private int IndexFour = 1;
-    private int IndexFive = 2;
-    private int IndexNine = 3;
+    private void InitializeRomanTables()
+    {
+        for(int i = 0; i < 4; i++)
+        {
+            hundreds[i].exponent = 2;
+            tens[i].exponent = 1;
+            ones[i].exponent = 0;
+        }
+        hundreds[IndexOne].base = tens[IndexOne].base = ones[IndexOne].base = One;
+        hundreds[IndexFour].base = tens[IndexFour].base = ones[IndexFour].base = Four;
+        hundreds[IndexFive].base = tens[IndexFive].base = ones[IndexFive].base = Five;
+        hundreds[IndexNine].base = tens[IndexNine].base = ones[IndexNine].base = Nine;
+    }
 
-    private String romanInput;
+
 
     public int GetRepeatableValue(Roman romanNumber) {
         int result = 0;
@@ -72,6 +93,7 @@ public class Main {
     }
 
     public int RomanToDecimal(String str) {
+        InitializeRomanTables();
         romanInput = str;
         final int FAIL = -9999;
         int result = 0;

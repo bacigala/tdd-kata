@@ -4,6 +4,10 @@ public class Roman {
     public int base;
     public int exponent;
     public String symbol;
+    public Roman(String symbol)
+    {
+        this.symbol = symbol;
+    }
     public Roman(String symbol, int base, int exponent)
     {
         this.symbol = symbol;
