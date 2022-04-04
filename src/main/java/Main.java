@@ -35,7 +35,7 @@ public class Main {
 
     private String romanInput;
 
-    public int MCXItoDecimal(Roman romanNumber) {
+    public int GetRepeatableValue(Roman romanNumber) {
         int result = 0;
         for (int i = 0; i < 3; i++) {
             if (romanInput.startsWith(romanNumber.romanForm)) {
@@ -55,7 +55,7 @@ public class Main {
         return result;
     }
 
-    public int Blah2(Roman[] inArr) {
+    public int GetNonRepeatableValue(Roman[] inArr) {
         int result = 0;
         if ((result = GetFourFiveNineInt(inArr[IndexFive])) != 0)
             return result;
@@ -71,24 +71,24 @@ public class Main {
         if (romanInput == null || romanInput.equals(""))
             return FAIL;
 
-        result += MCXItoDecimal(thousand);
+        result += GetRepeatableValue(thousand);
 
-        result += Blah2(hundreds);
+        result += GetNonRepeatableValue(hundreds);
 
         if (result % 500 == 0) {
-            result += MCXItoDecimal(hundreds[IndexOne]);
+            result += GetRepeatableValue(hundreds[IndexOne]);
         }
 
-        result += Blah2(tens);
+        result += GetNonRepeatableValue(tens);
 
         if (result % 50 == 0) {
-            result += MCXItoDecimal(tens[IndexOne]);
+            result += GetRepeatableValue(tens[IndexOne]);
         }
 
-        result += Blah2(ones);
+        result += GetNonRepeatableValue(ones);
 
         if (result % 5 == 0)
-            result += MCXItoDecimal(ones[IndexOne]);
+            result += GetRepeatableValue(ones[IndexOne]);
 
         if (romanInput.length() > 0) {
             return FAIL;
