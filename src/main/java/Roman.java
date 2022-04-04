@@ -3,10 +3,10 @@ import java.lang.Math;
 public class Roman {
     public int base;
     public int exponent;
-    public String romanForm;
-    public Roman(String romanForm, int base, int exponent)
+    public String symbol;
+    public Roman(String symbol, int base, int exponent)
     {
-        this.romanForm = romanForm;
+        this.symbol = symbol;
         this.base = base;
         this.exponent = exponent;
     }

@@ -38,7 +38,7 @@ public class Main {
     public int GetRepeatableValue(Roman romanNumber) {
         int result = 0;
         for (int i = 0; i < 3; i++) {
-            if (romanInput.startsWith(romanNumber.romanForm)) {
+            if (romanInput.startsWith(romanNumber.symbol)) {
                 result += romanNumber.GetIntegerForm();
                 romanInput = romanInput.substring(1);
             }
@@ -47,12 +47,11 @@ public class Main {
     }
 
     public int GetFourFiveNineInt(Roman roman) {
-        int result = 0;
-        if (romanInput.startsWith(roman.romanForm)) {
-            romanInput = romanInput.substring(roman.romanForm.length());
-            result += roman.GetIntegerForm();
+        if (romanInput.startsWith(roman.symbol)) {
+            romanInput = romanInput.substring(roman.symbol.length());
+            return roman.GetIntegerForm();
         }
-        return result;
+        return 0;
     }
 
     public int GetNonRepeatableValue(Roman[] inArr) {
@@ -64,6 +63,14 @@ public class Main {
         return GetFourFiveNineInt(inArr[IndexFour]);
     }
 
+    public int Blah3(Roman[] inArr, int res){
+        res += GetNonRepeatableValue(inArr);
+        if (res % inArr[IndexFive].GetIntegerForm() == 0) {
+            res += GetRepeatableValue(inArr[IndexOne]);
+        }
+        return res;
+    }
+
     public int RomanToDecimal(String str) {
         romanInput = str;
         final int FAIL = -9999;
@@ -73,22 +80,10 @@ public class Main {
 
         result += GetRepeatableValue(thousand);
 
-        result += GetNonRepeatableValue(hundreds);
+        result = Blah3(hundreds, result);
+        result = Blah3(tens, result);
+        result = Blah3(ones, result);
 
-        if (result % 500 == 0) {
-            result += GetRepeatableValue(hundreds[IndexOne]);
-        }
-
-        result += GetNonRepeatableValue(tens);
-
-        if (result % 50 == 0) {
-            result += GetRepeatableValue(tens[IndexOne]);
-        }
-
-        result += GetNonRepeatableValue(ones);
-
-        if (result % 5 == 0)
-            result += GetRepeatableValue(ones[IndexOne]);
 
         if (romanInput.length() > 0) {
             return FAIL;
