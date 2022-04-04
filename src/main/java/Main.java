@@ -101,16 +101,7 @@ public class Main {
             result += MCXItoDecimal(ten);
         }
 
-        if (romanInput.startsWith("IX")) {
-            romanInput = romanInput.substring(2);
-            result += 9;
-        } else if (romanInput.contains("IV")) {
-            romanInput = romanInput.substring(2);
-            result += 4;
-        } else if (romanInput.startsWith("V")) {
-            result += 5;
-            romanInput = romanInput.substring(1);
-        }
+        result += Blah2(ones);
 
 
         if (result % 5 == 0)
