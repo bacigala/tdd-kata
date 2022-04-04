@@ -23,6 +23,13 @@ public class Main {
             new Roman("XC", 9, 1),
     };
 
+    private Roman ones[] = {
+            new Roman("I", 1, 0),
+            new Roman("IV", 4, 0),
+            new Roman("V", 5, 0),
+            new Roman("IX", 9, 0),
+    };
+
     private String romanInput;
 
     public int MCXItoDecimal(Roman romanNumber) {
@@ -88,9 +95,8 @@ public class Main {
             result += MCXItoDecimal(hundreds[0]);
         }
 
-
         result += Blah2(tens);
-        
+
         if (result % 50 == 0) {
             result += MCXItoDecimal(ten);
         }
@@ -98,30 +104,21 @@ public class Main {
         if (romanInput.startsWith("IX")) {
             romanInput = romanInput.substring(2);
             result += 9;
-            if (romanInput.length() == 0)
-                return result;
-            else
-                return FAIL;
         } else if (romanInput.contains("IV")) {
             romanInput = romanInput.substring(2);
             result += 4;
-            if (romanInput.length() == 0)
-                return result;
-            else
-                return FAIL;
-        }
-
-        if (romanInput.startsWith("V")) {
+        } else if (romanInput.startsWith("V")) {
             result += 5;
             romanInput = romanInput.substring(1);
         }
 
-        result += MCXItoDecimal(one);
+
+        if (result % 5 == 0)
+            result += MCXItoDecimal(one);
 
         if (romanInput.length() > 0) {
             return FAIL;
         }
-
         return result;
     }
 }
