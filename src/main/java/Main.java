@@ -16,6 +16,13 @@ public class Main {
             new Roman("CM", 9, 2),
     };
 
+    private Roman tens[] = {
+            new Roman("X", 1, 1),
+            new Roman("XL", 4, 1),
+            new Roman("L", 5, 1),
+            new Roman("XC", 9, 1),
+    };
+
     private String romanInput;
 
     public int MCXItoDecimal(Roman romanNumber) {
@@ -82,16 +89,8 @@ public class Main {
         }
 
 
-        if (romanInput.startsWith("L")) {
-            result += 50;
-            romanInput = romanInput.substring(1);
-        } else if (romanInput.startsWith("XC")) {
-            romanInput = romanInput.substring(2);
-            result += 90;
-        } else if (romanInput.contains("XL")) {
-            romanInput = romanInput.substring(2);
-            result += 40;
-        }
+        result += Blah2(tens);
+        
         if (result % 50 == 0) {
             result += MCXItoDecimal(ten);
         }
