@@ -63,7 +63,7 @@ public class Main {
         return GetFourFiveNineInt(inArr[IndexFour]);
     }
 
-    public int Blah3(Roman[] inArr, int res){
+    public int AddSumOfRepeatableAndNonRepeatable(Roman[] inArr, int res){
         res += GetNonRepeatableValue(inArr);
         if (res % inArr[IndexFive].GetIntegerForm() == 0) {
             res += GetRepeatableValue(inArr[IndexOne]);
@@ -78,12 +78,11 @@ public class Main {
         if (romanInput == null || romanInput.equals(""))
             return FAIL;
 
-        result += GetRepeatableValue(thousand);
+        result = GetRepeatableValue(thousand);
 
-        result = Blah3(hundreds, result);
-        result = Blah3(tens, result);
-        result = Blah3(ones, result);
-
+        result = AddSumOfRepeatableAndNonRepeatable(hundreds, result);
+        result = AddSumOfRepeatableAndNonRepeatable(tens, result);
+        result = AddSumOfRepeatableAndNonRepeatable(ones, result);
 
         if (romanInput.length() > 0) {
             return FAIL;
