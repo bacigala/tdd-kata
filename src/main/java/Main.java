@@ -7,11 +7,13 @@ public class Main {
     }
     private Roman thousand = new Roman("M", 1, 3);
     private Roman hundred = new Roman("C", 1, 2);
+    private Roman ten = new Roman("X", 1, 1);
+    private Roman one = new Roman("I", 1, 0);
+
     private Roman nineHundreds = new Roman("CM", 9, 2);
     private Roman fiveHundreds = new Roman("D", 5, 2);
     private Roman fourHundreds = new Roman("CD", 4, 2);
-    private Roman ten = new Roman("X", 1, 1);
-    private Roman one = new Roman("I", 1, 0);
+
     private String romanInput;
 
     public int MCXItoDecimal(Roman romanNumber) {
@@ -25,19 +27,42 @@ public class Main {
         return result;
     }
 
-    public int Blah2() {
+    public int Five() {
         int result = 0;
         if (romanInput.startsWith(fiveHundreds.romanForm)) {
             romanInput = romanInput.substring(1);
             result += fiveHundreds.GetIntegerForm();
-        } else if (romanInput.startsWith(nineHundreds.romanForm)) {
+        }
+        return result;
+    }
+
+    public int Nine() {
+        int result = 0;
+        if (romanInput.startsWith(nineHundreds.romanForm)) {
             romanInput = romanInput.substring(2);
             result += nineHundreds.GetIntegerForm();
-        } else if (romanInput.startsWith(fourHundreds.romanForm)) {
+        }
+        return result;
+    }
+
+    public int Four() {
+        int result = 0;
+        if (romanInput.startsWith(fourHundreds.romanForm)) {
             romanInput = romanInput.substring(2);
             result += fourHundreds.GetIntegerForm();
         }
         return result;
+    }
+
+    public int Blah2() {
+        int result = Five();
+        if (result != 0)
+            return result;
+
+        result = Nine();
+        if (result != 0)
+            return result;
+        return Four();
     }
 
     public int RomanToDecimal(String str) {
