@@ -11,7 +11,7 @@ public class Main {
     private Roman one = new Roman("I", 1);
     private String romanInput;
 
-    public int Blah(String roman, int decimal) {
+    public int MCXItoDecimal(String roman, int decimal) {
         int result = 0;
         for (int i = 0; i < 3; i++) {
             if (romanInput.startsWith(roman)) {
@@ -29,7 +29,7 @@ public class Main {
         if (romanInput == null || romanInput.equals(""))
             return FAIL;
 
-        result += Blah(thousand.roman, thousand.decimal);
+        result += MCXItoDecimal(thousand.roman, thousand.decimal);
 
         if (romanInput.startsWith("D")) {
             romanInput = romanInput.substring(1);
@@ -43,7 +43,7 @@ public class Main {
         }
 
         if (result % 500 == 0) {
-            result += Blah(hundred.roman, hundred.decimal);
+            result += MCXItoDecimal(hundred.roman, hundred.decimal);
         }
 
 
@@ -58,7 +58,7 @@ public class Main {
             result += 40;
         }
         if (result % 50 == 0) {
-            result += Blah(ten.roman, ten.decimal);
+            result += MCXItoDecimal(ten.roman, ten.decimal);
         }
 
         if (romanInput.startsWith("IX")) {
@@ -82,7 +82,7 @@ public class Main {
             romanInput = romanInput.substring(1);
         }
 
-        result += Blah(one.roman, one.decimal);
+        result += MCXItoDecimal(one.roman, one.decimal);
 
         if (romanInput.length() > 0) {
             return FAIL;
