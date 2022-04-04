@@ -7,6 +7,9 @@ public class Main {
     }
     private Roman thousand = new Roman("M", 1, 3);
     private Roman hundred = new Roman("C", 1, 2);
+    private Roman nineHundreds = new Roman("CM", 9, 2);
+    private Roman fiveHundreds = new Roman("D", 5, 2);
+    private Roman fourHundreds = new Roman("CD", 4, 2);
     private Roman ten = new Roman("X", 1, 1);
     private Roman one = new Roman("I", 1, 0);
     private String romanInput;
@@ -22,17 +25,17 @@ public class Main {
         return result;
     }
 
-    public int Blah2(int order) {
+    public int Blah2() {
         int result = 0;
-        if (romanInput.startsWith("D")) {
+        if (romanInput.startsWith(fiveHundreds.romanForm)) {
             romanInput = romanInput.substring(1);
-            result += 5 * order;
-        } else if (romanInput.startsWith("CM")) {
+            result += fiveHundreds.GetIntegerForm();
+        } else if (romanInput.startsWith(nineHundreds.romanForm)) {
             romanInput = romanInput.substring(2);
-            result += 9 * order;
-        } else if (romanInput.startsWith("CD")) {
+            result += nineHundreds.GetIntegerForm();
+        } else if (romanInput.startsWith(fourHundreds.romanForm)) {
             romanInput = romanInput.substring(2);
-            result += 4 * order;
+            result += fourHundreds.GetIntegerForm();
         }
         return result;
     }
@@ -46,7 +49,7 @@ public class Main {
 
         result += MCXItoDecimal(thousand);
 
-        result += Blah2(100);
+        result += Blah2();
 
         if (result % 500 == 0) {
             result += MCXItoDecimal(hundred);
