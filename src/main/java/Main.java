@@ -6,14 +6,14 @@ public class Main {
         System.out.println(m.RomanToDecimal("I"));
     }
     private Roman thousand = new Roman("M", 1, 3);
-    private Roman hundred = new Roman("C", 1, 2);
     private Roman ten = new Roman("X", 1, 1);
     private Roman one = new Roman("I", 1, 0);
 
     private Roman hundreds[] = {
-        new Roman("CM", 9, 2),
-        new Roman("D", 5, 2),
-        new Roman("CD", 4, 2),
+            new Roman("C", 1, 2),
+            new Roman("CD", 4, 2),
+            new Roman("D", 5, 2),
+            new Roman("CM", 9, 2),
     };
 
     private String romanInput;
@@ -57,13 +57,13 @@ public class Main {
     }
 
     public int Blah2(Roman[] inArr) {
-        int result = Five(inArr[1]);
+        int result = Five(inArr[2]);
         if (result != 0)
             return result;
-        result = Nine(inArr[0]);
+        result = Nine(inArr[3]);
         if (result != 0)
             return result;
-        return Four(inArr[2]);
+        return Four(inArr[1]);
     }
 
     public int RomanToDecimal(String str) {
@@ -78,7 +78,7 @@ public class Main {
         result += Blah2(hundreds);
 
         if (result % 500 == 0) {
-            result += MCXItoDecimal(hundred);
+            result += MCXItoDecimal(hundreds[0]);
         }
 
 
