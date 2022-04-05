@@ -5,11 +5,10 @@ import java.util.List;
 
 public class RomanCalculator {
     private static final int FAIL = -9999;
-    public static final ArrayList<Character> OPERATORS = new ArrayList<>(Arrays.asList('+', '-', '.', '/'));
-    public static final ArrayList<Character> SYMBOLS = new ArrayList<>(Arrays.asList('I', 'V', 'X', 'L', 'C', 'D', 'M'));
+    private static final ArrayList<Character> OPERATORS = new ArrayList<>(Arrays.asList('+', '-', '.', '/'));
+    private static final ArrayList<Character> SYMBOLS = new ArrayList<>(Arrays.asList('I', 'V', 'X', 'L', 'C', 'D', 'M'));
 
-
-    public static String parseSequenceOf(List<Character> allowed, String string) {
+    private static String parseSequenceOf(List<Character> allowed, String string) {
         if (string == null || string.isEmpty() || allowed == null || allowed.isEmpty())
             return null;
 
@@ -26,7 +25,7 @@ public class RomanCalculator {
         return result.toString();
     }
 
-    public static int lengthOfStartSequenceOf(Collection<Character> characters, String string) {
+    private static int lengthOfStartSequenceOf(Collection<Character> characters, String string) {
         if (string == null || string.isEmpty())
             return 0;
 

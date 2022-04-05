@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Test;
 class RomanToArabicTest {
 
     @Test
-    void testToInt() {
+    void allTests() {
         final int FAIL = -9999;
         assert(RomanToArabic.convert("0") == FAIL);
         assert(RomanToArabic.convert("-I") == FAIL);
@@ -62,15 +62,6 @@ class RomanToArabicTest {
         assert(RomanToArabic.convert("IXI") == FAIL);
         assert(RomanToArabic.convert("XV") == 15);
         assert(RomanToArabic.convert(null) == FAIL);
-    }
-
-    @Test
-    void test_romanCalculator() {
-        assert(RomanCalculator.evaluate("I+I").equals("II"));
-        assert(RomanCalculator.evaluate("I + I").equals("II"));
-        assert(RomanCalculator.evaluate("   I+I   ").equals("II"));
-        assert(RomanCalculator.evaluate("II+I").equals("III"));
-        assert(RomanCalculator.evaluate("C/L").equals("II"));
     }
 
 }
