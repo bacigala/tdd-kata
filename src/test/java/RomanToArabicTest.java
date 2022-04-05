@@ -66,11 +66,11 @@ class RomanToArabicTest {
 
     @Test
     void test_romanCalculator() {
-        assert(Main.romanCalculator("I+I").equals("II"));
-        assert(Main.romanCalculator("I + I").equals("II"));
-        assert(Main.romanCalculator("   I+I   ").equals("II"));
-        assert(Main.romanCalculator("II+I").equals("III"));
-        assert(Main.romanCalculator("C/L").equals("II"));
+        assert(RomanCalculator.evaluate("I+I").equals("II"));
+        assert(RomanCalculator.evaluate("I + I").equals("II"));
+        assert(RomanCalculator.evaluate("   I+I   ").equals("II"));
+        assert(RomanCalculator.evaluate("II+I").equals("III"));
+        assert(RomanCalculator.evaluate("C/L").equals("II"));
     }
 
 }
