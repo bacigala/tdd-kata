@@ -68,31 +68,17 @@ public class RomanCalculator {
             return WRONG_INPUT_MESSAGE;
 
         // calculate integerResult
-        int integerResult = 0;
-        switch (operator) {
-            case '+':
-                integerResult = firstNumber + secondNumber;
-                break;
-            case '-':
-                if (firstNumber < secondNumber)
-                    return WRONG_INPUT_MESSAGE;
-                integerResult = firstNumber - secondNumber;
-                break;
-            case '*':
-                integerResult = firstNumber * secondNumber;
-                break;
-            case '/':
-                if (firstNumber % secondNumber != 0)
-                    return WRONG_RESULT_MESSAGE;
-                integerResult = firstNumber / secondNumber;
-                break;
-        }
+        Integer integerResult = ArabicCalculator.evaluate(firstNumber, secondNumber, operator);
+        if (integerResult == null)
+            return WRONG_RESULT_MESSAGE;
+        if (integerResult <= 0)
+            return WRONG_INPUT_MESSAGE;
 
-        // validate integerResult
-        String result = ArabicToRoman.convert(integerResult);
-        if (result == null)
+        // convert integerResult to romanResult
+        String romanResult = ArabicToRoman.convert(integerResult);
+        if (romanResult == null)
             return WRONG_RESULT_MESSAGE;
 
-        return result;
+        return romanResult;
     }
 }
