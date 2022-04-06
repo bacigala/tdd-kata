@@ -1,4 +1,6 @@
+
 public class ArabicCalculator {
+
     public static Integer evaluate(int operand1, int operand2, char operator) {
         switch (operator) {
             case '+':
@@ -8,6 +10,8 @@ public class ArabicCalculator {
             case '*':
                 return operand1 * operand2;
             case '/':
+                if (operand2 == 0)
+                    return null;
                 if (operand1 % operand2 != 0)
                     return null;
                 return operand1 / operand2;
@@ -15,4 +19,5 @@ public class ArabicCalculator {
                 return null;
         }
     }
+
 }
