@@ -5,10 +5,10 @@ import java.util.List;
 
 public class RomanCalculator {
     private static final int FAIL = -9999;
-    private static final ArrayList<Character> OPERATORS = new ArrayList<>(Arrays.asList('+', '-', '.', '/'));
+    private static final ArrayList<Character> OPERATORS = new ArrayList<>(Arrays.asList('+', '-', '*', '/'));
     private static final ArrayList<Character> SYMBOLS = new ArrayList<>(Arrays.asList('I', 'V', 'X', 'L', 'C', 'D', 'M'));
 
-    private static String parseSequenceOf(List<Character> allowed, String string) {
+    private static String cleanSequenceOf(List<Character> allowed, String string) {
         if (string == null || string.isEmpty() || allowed == null || allowed.isEmpty())
             return null;
 
@@ -37,31 +37,40 @@ public class RomanCalculator {
         return string.length();
     }
 
+    private static String[] cutStartSequenceOf(List<Character> characters, String expression) {
+        int sequenceLength = lengthOfStartSequenceOf(characters, expression);
+        String sequence = cleanSequenceOf(characters, expression.substring(0, sequenceLength));
+        return new String[] {sequence, expression.substring(sequenceLength)};
+    }
+
+
     public static String evaluate(String expression) {
         final String WRONG_INPUT_MESSAGE = "Wrong input";
         final String WRONG_RESULT_MESSAGE = "Wrong number";
 
+        if (expression == null || expression.isEmpty())
+            return WRONG_INPUT_MESSAGE;
+
         // first operand
-        int firstNumberLength = lengthOfStartSequenceOf(SYMBOLS, expression);
-        int firstNumber = RomanToArabic.convert(parseSequenceOf(SYMBOLS, expression.substring(0, firstNumberLength)));
+        String[] processedFirstNumber = cutStartSequenceOf(SYMBOLS, expression);
+        int firstNumber = RomanToArabic.convert(processedFirstNumber[0]);
         if (firstNumber == FAIL)
             return WRONG_INPUT_MESSAGE;
-        expression = expression.substring(firstNumberLength);
+        expression = processedFirstNumber[1];
 
         // operator
-        int operatorLength = lengthOfStartSequenceOf(OPERATORS, expression);
-        String operatorSequence = parseSequenceOf(OPERATORS, expression.substring(0, operatorLength));
-        if (operatorSequence.length() > 1)
+        String[] processedOperator = cutStartSequenceOf(OPERATORS, expression);
+        if (processedOperator[0] == null || processedOperator[0].length() > 1)
             return WRONG_INPUT_MESSAGE;
-        char operator = operatorSequence.charAt(0);
-        expression = expression.substring(operatorLength);
+        char operator = processedOperator[0].charAt(0);
+        expression = processedOperator[1];
 
         // second operand
-        int secondNumberLength = lengthOfStartSequenceOf(SYMBOLS, expression);
-        int secondNumber = RomanToArabic.convert(parseSequenceOf(SYMBOLS, expression.substring(0, secondNumberLength)));
+        String[] processedSecondNumber = cutStartSequenceOf(SYMBOLS, expression);
+        int secondNumber = RomanToArabic.convert(processedSecondNumber[0]);
         if (secondNumber == FAIL)
             return WRONG_INPUT_MESSAGE;
-        expression = expression.substring(secondNumberLength);
+        expression = processedSecondNumber[1];
 
         // check: was everything parsed?
         if (expression.length() > 0)
@@ -69,10 +78,12 @@ public class RomanCalculator {
 
         // calculate integerResult
         Integer integerResult = ArabicCalculator.evaluate(firstNumber, secondNumber, operator);
-        if (integerResult == null)
-            return WRONG_RESULT_MESSAGE;
+        if (integerResult == null) {
+            boolean fractionalResult = operator == '/' && firstNumber % secondNumber != 0;
+            return fractionalResult ? WRONG_RESULT_MESSAGE : WRONG_INPUT_MESSAGE;
+        }
         if (integerResult <= 0)
-            return WRONG_INPUT_MESSAGE;
+            return WRONG_RESULT_MESSAGE;
 
         // convert integerResult to romanResult
         String romanResult = ArabicToRoman.convert(integerResult);
