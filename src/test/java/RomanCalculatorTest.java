@@ -40,7 +40,7 @@ public class RomanCalculatorTest {
     void multipleOperators() {
         assertEquals(WRONG_INPUT_MESSAGE, RomanCalculator.evaluate("I++I"));
         assertEquals(WRONG_INPUT_MESSAGE, RomanCalculator.evaluate("X-/IV"));
-        assertEquals(WRONG_INPUT_MESSAGE, RomanCalculator.evaluate("V*/V"));
+        assertEquals(WRONG_INPUT_MESSAGE, RomanCalculator.evaluate("V*-/V"));
     }
 
     @Test
@@ -48,6 +48,7 @@ public class RomanCalculatorTest {
         assertEquals(WRONG_INPUT_MESSAGE, RomanCalculator.evaluate("a+I"));
         assertEquals(WRONG_INPUT_MESSAGE, RomanCalculator.evaluate("I- "));
         assertEquals(WRONG_INPUT_MESSAGE, RomanCalculator.evaluate("II*1"));
+        assertEquals(WRONG_INPUT_MESSAGE, RomanCalculator.evaluate("III*VaI"));
     }
 
     @Test
@@ -143,6 +144,46 @@ public class RomanCalculatorTest {
     void multiplicationRomanOverflow() {
         assertEquals(WRONG_RESULT_MESSAGE, RomanCalculator.evaluate("X*M"));
         assertEquals(WRONG_RESULT_MESSAGE, RomanCalculator.evaluate("D*VIII"));
+    }
+
+    @Test
+    void fromAssignment1() {
+        assertEquals("XX", RomanCalculator.evaluate("XI + I X "));
+    }
+
+    @Test
+    void fromAssignment2() {
+        assertEquals("V", RomanCalculator.evaluate("XXV/V"));
+    }
+
+    @Test
+    void fromAssignment3() {
+        assertEquals("MCCXXII", RomanCalculator.evaluate("MMCDXLIV-MCCXXII"));
+    }
+
+    @Test
+    void fromAssignment4() {
+        assertEquals(WRONG_INPUT_MESSAGE, RomanCalculator.evaluate(" MD "));
+    }
+
+    @Test
+    void fromAssignment5() {
+        assertEquals(WRONG_RESULT_MESSAGE, RomanCalculator.evaluate("MCDXLIV / MCDXLV"));
+    }
+
+    @Test
+    void fromAssignment6() {
+        assertEquals(WRONG_INPUT_MESSAGE, RomanCalculator.evaluate(" MMMM + I"));
+    }
+
+    @Test
+    void fromAssignment7() {
+        assertEquals(WRONG_RESULT_MESSAGE, RomanCalculator.evaluate("MMM + M"));
+    }
+
+    @Test
+    void fromAssignment8() {
+        assertEquals(WRONG_INPUT_MESSAGE, RomanCalculator.evaluate("MM @ I"));
     }
 
 }
