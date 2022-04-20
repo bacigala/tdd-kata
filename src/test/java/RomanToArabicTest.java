@@ -287,4 +287,351 @@ class RomanToArabicTest {
         assertEquals(FAIL, RomanToArabic.convert(null));
     }
 
+    //
+    //  TESTS FOR ALTERNATIVE "ROMAN" SYSTEMS, using minimal systems
+    //
+
+    @Test
+    void test1_alternative() {
+        assertEquals(1, RomanToArabic.convert("A", "A"));
+        assertEquals(1, RomanToArabic.convert("Q", "Q"));
+    }
+
+    @Test
+    void test4_alternative() {
+        assertEquals(4, RomanToArabic.convert("AB", "AB"));
+    }
+
+    @Test
+    void test2_alternative() {
+        assertEquals(2, RomanToArabic.convert("A", "AA"));
+    }
+
+    @Test
+    void test3_alternative() {
+        assertEquals(3, RomanToArabic.convert("A","AAA"));
+    }
+
+    @Test
+    void testFake4TooManyI_alternative() {
+        assertEquals(FAIL, RomanToArabic.convert("A","AAAA"));
+    }
+
+    @Test
+    void test5_alternative() {
+        assertEquals(5, RomanToArabic.convert("AB","B"));
+    }
+
+    @Test
+    void test6_alternative() {
+        assertEquals(6, RomanToArabic.convert("AB","BA"));
+    }
+
+    @Test
+    void test7_alternative() {
+        assertEquals(7, RomanToArabic.convert("AB","BAA"));
+    }
+
+    @Test
+    void test8_alternative() {
+        assertEquals(8, RomanToArabic.convert("AB","BAAA"));
+    }
+
+    @Test
+    void test9_alternative() {
+        assertEquals(9, RomanToArabic.convert("ABC", "AC"));
+    }
+
+    @Test
+    void testFake9TooManyI_alternative() {
+        assertEquals(FAIL, RomanToArabic.convert("AB","BAAAA"));
+    }
+
+    @Test
+    void test10_alternative() {
+        assertEquals(10, RomanToArabic.convert("ABC","C"));
+    }
+
+    @Test
+    void test40_alternative() {
+        assertEquals(40, RomanToArabic.convert("ABCD","CD"));
+    }
+
+    @Test
+    void test90_alternative() {
+        assertEquals(90, RomanToArabic.convert("ABCDE","CE"));
+    }
+
+    @Test
+    void test9_4_alternative() {
+        assertEquals(FAIL, RomanToArabic.convert("ABC","ACAB"));
+    }
+
+    @Test
+    void test5_4_alternative() {
+        assertEquals(FAIL, RomanToArabic.convert("AB", "BAB"));
+    }
+
+    @Test
+    void test400_alternative() {
+        assertEquals(400, RomanToArabic.convert("ABCDEF", "EF"));
+    }
+
+    @Test
+    void test900_alternative() {
+        assertEquals(900, RomanToArabic.convert("ABCDEFG","EG"));
+    }
+
+    @Test
+    void test990_alternative() {
+        assertEquals(990, RomanToArabic.convert("ABCDEFG","EGCE"));
+    }
+
+    @Test
+    void test999_alternative() {
+        assertEquals(999, RomanToArabic.convert("ABCDEFG", "EGCEAC"));
+    }
+
+    @Test
+    void test994_alternative() {
+        assertEquals(994, RomanToArabic.convert("ABCDEFG","EGCEAB"));
+    }
+
+    @Test
+    void test499_alternative() {
+        assertEquals(499, RomanToArabic.convert("ABCDEF","EFCEAC"));
+    }
+
+    @Test
+    void test490_alternative() {
+        assertEquals(490, RomanToArabic.convert("ABCDEF","EFCE"));
+    }
+
+    @Test
+    void test54_alternative() {
+        assertEquals(54, RomanToArabic.convert("ABCD","DAB"));
+    }
+
+    @Test
+    void test450_alternative() {
+        assertEquals(450, RomanToArabic.convert("ABCDEF","EFD"));
+    }
+
+    @Test
+    void test540_alternative() {
+        assertEquals(540, RomanToArabic.convert("ABCDEF", "FCD"));
+    }
+
+    @Test
+    void test9_10_alternative() {
+        assertEquals(FAIL, RomanToArabic.convert("ABC", "ACC"));
+    }
+
+    @Test
+    void test30_alternative() {
+        assertEquals(30, RomanToArabic.convert("ABC", "CCC"));
+    }
+
+    @Test
+    void testFake40_tooManyX_alternative() {
+        assertEquals(FAIL, RomanToArabic.convert("ABC", "CCCC"));
+    }
+
+    @Test
+    void test1000_alternative() {
+        assertEquals(1000, RomanToArabic.convert("ABCDEFG", "G"));
+    }
+
+    @Test
+    void test2000_alternative() {
+        assertEquals(2000, RomanToArabic.convert("ABCDEFG", "GG"));
+    }
+
+    @Test
+    void test3000_alternative() {
+        assertEquals(3000, RomanToArabic.convert("ABCDEFG","GGG"));
+    }
+
+    @Test
+    void test3999_alternative() {
+        assertEquals(3999, RomanToArabic.convert("ABCDEFG", "GGGEGCEAC"));
+    }
+
+    @Test
+    void test3840_alternative() {
+        assertEquals(3840, RomanToArabic.convert("ABCDEFG", "GGGFEEECD"));
+    }
+
+    @Test
+    void testFakeCDCC_alternative() {
+        assertEquals(FAIL, RomanToArabic.convert("ABCDEF", "EFEE"));
+    }
+
+    @Test
+    void test200_alternative() {
+        assertEquals(200, RomanToArabic.convert("ABCDE", "EE"));
+    }
+
+    @Test
+    void test602_alternative() {
+        assertEquals(602, RomanToArabic.convert("ABCDEF", "FEAA"));
+    }
+
+    @Test
+    void test402_alternative() {
+        assertEquals(402, RomanToArabic.convert("ABCDEF","EFAA"));
+    }
+
+    @Test
+    void testFakeVV_alternative() {
+        assertEquals(FAIL, RomanToArabic.convert("AB","BB"));
+    }
+
+    @Test
+    void testFakeLL_alternative() {
+        assertEquals(FAIL, RomanToArabic.convert("ABCD", "DD"));
+    }
+
+    @Test
+    void testFakeDD_alternative() {
+        assertEquals(FAIL, RomanToArabic.convert("ABCDEF", "FF"));
+    }
+
+    @Test
+    void test89_alternative() {
+        assertEquals(89, RomanToArabic.convert("ABCD", "DCCCAC"));
+    }
+
+    @Test
+    void test889_alternative() {
+        assertEquals(889, RomanToArabic.convert("ABCDEF", "FEEEDCCCAC"));
+    }
+
+    @Test
+    void test99_alternative() {
+        assertEquals(99, RomanToArabic.convert("ABCDE", "CEAC"));
+    }
+
+    @Test
+    void test94_alternative() {
+        assertEquals(94, RomanToArabic.convert("ABCDE", "CEAB"));
+    }
+
+    @Test
+    void test789_alternative() {
+        assertEquals(789, RomanToArabic.convert("ABCDEF", "FEEDCCCAC"));
+    }
+
+    @Test
+    void test2421_alternative() {
+        assertEquals(2421, RomanToArabic.convert("ABCDEFG", "GGEFCCA"));
+    }
+
+    @Test
+    void test1009_alternative() {
+        assertEquals(1009, RomanToArabic.convert("ABCDEFG", "GAC"));
+    }
+
+    @Test
+    void testFake4000_alternative() {
+        assertEquals(FAIL, RomanToArabic.convert("ABCDEFG", "GGGG"));
+    }
+
+    @Test
+    void testFakeXCX_alternative() {
+        assertEquals(FAIL, RomanToArabic.convert("ABCDE", "CEC"));
+    }
+
+    @Test
+    void testFakeIXI_alternative() {
+        assertEquals(FAIL, RomanToArabic.convert("ABC", "ACA"));
+    }
+
+    @Test
+    void test15_alternative() {
+        assertEquals(15, RomanToArabic.convert("ABC", "CB"));
+    }
+
+    @Test
+    void testNullParameters() {
+        assertEquals(FAIL, RomanToArabic.convert(null, null));
+    }
+
+    //
+    //  ALTERNATIVE ROMAN SYSTEMS - tests from assignment
+    //
+
+    @Test
+    void test_fromAssignment1() {
+        assertEquals(8, RomanToArabic.convert("IV", "VIII"));
+    }
+
+    @Test
+    void test_fromAssignment2() {
+        assertEquals(3, RomanToArabic.convert("A", "AAA"));
+    }
+
+    @Test
+    void test_fromAssignment3() {
+        assertEquals(FAIL, RomanToArabic.convert("I", "IV"));
+    }
+
+    @Test
+    void test_fromAssignment4() {
+        assertEquals(89, RomanToArabic.convert("IVXL", "LXXXIX"));
+    }
+
+    @Test
+    void test_fromAssignment5() {
+        assertEquals(1015, RomanToArabic.convert("IAVXLCQDM", "QVA"));
+    }
+
+    @Test
+    void test_fromAssignment6() {
+        assertEquals(300000, RomanToArabic.convert("IVXLCDMPQRS", "SSS"));
+    }
+
+    @Test
+    void test_fromAssignment7() {
+        assertEquals(FAIL, RomanToArabic.convert("", "IV"));
+    }
+
+    @Test
+    void test_fromAssignment8() {
+        assertEquals(FAIL, RomanToArabic.convert("IVXLX", "IV"));
+    }
+
+    //
+    //  ALTERNATIVE ROMAN SYSTEMS - more tests
+    //
+
+    @Test
+    void test_nullRomanSystem() {
+        assertEquals(FAIL, RomanToArabic.convert(null, "I"));
+    }
+
+    @Test
+    void test_unnecessarilyLongSystem() {
+        assertEquals(1, RomanToArabic.convert("AB", "A"));
+        assertEquals(1, RomanToArabic.convert("ABC", "A"));
+        assertEquals(15, RomanToArabic.convert("ABCDEFGHIJKLM", "CB"));
+    }
+
+    @Test
+    void test_symbolsNotFromSystem() {
+        assertEquals(FAIL, RomanToArabic.convert("ABCDE", "X"));
+        assertEquals(FAIL, RomanToArabic.convert("ABCDE", "QQ"));
+    }
+
+    @Test
+    void test_longestSystem() {
+        assertEquals(1, RomanToArabic.convert("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "A"));
+        assertEquals(2, RomanToArabic.convert("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "AA"));
+    }
+
+    @Test
+    void test_highNumber() {
+        assertEquals(2147483643, RomanToArabic.convert("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "Z"));
+    }
+
 }
