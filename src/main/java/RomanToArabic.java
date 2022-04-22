@@ -10,6 +10,7 @@ public class RomanToArabic {
     private final static int INDEX_FIVE = 2;
     private final static int INDEX_NINE = 3;
     private final static int MAX_REPEATABLE_SYMBOLS = 3;
+    private final static int FAIL = -9999;
 
     private static RomanNumber[] constructRomanOrder(String romanCharacters, int order) {
         if (romanCharacters == null || romanCharacters.isEmpty())
@@ -66,9 +67,13 @@ public class RomanToArabic {
         return true;
     }
 
+    private static boolean isValidRomanSystem(String romanSystem) {
+        return (romanSystem != null && !romanSystem.isEmpty() && isAlphabetic(romanSystem)
+                && !hasDuplicities(romanSystem) && isUpperCase(romanSystem));
+    }
+
     private static ArrayList<RomanNumber[]> constructRomanOrders(String romanSystem) {
-        if (romanSystem == null || romanSystem.isEmpty() || !isAlphabetic(romanSystem)
-                    || hasDuplicities(romanSystem) || !isUpperCase(romanSystem))
+        if (!isValidRomanSystem(romanSystem))
             return null;
 
         ArrayList<RomanNumber[]> result = new ArrayList<>();
@@ -123,8 +128,6 @@ public class RomanToArabic {
     }
 
     public static int convert(String romanSystem, String str) {
-        final int FAIL = -9999;
-
         ArrayList<RomanNumber[]> romanOrders = constructRomanOrders(romanSystem);
         if (romanOrders == null || romanOrders.isEmpty())
             return FAIL;
@@ -147,6 +150,37 @@ public class RomanToArabic {
         if (!romanInput.isEmpty())
             return FAIL;
         return result;
+    }
+
+    public static int highestIntegerFromRomanSystem(String romanSystem) {
+        if (!isValidRomanSystem(romanSystem))
+            return FAIL;
+
+        return Integer.parseInt((romanSystem.length() % 2 == 0 ? '8' : '3') +
+                "9".repeat(Math.round((float) romanSystem.length() / 2) - 1));
+    }
+
+    // this actually constructs the highest roman number :)
+    public static String highestRomanFromRomanSystem(String romanSystem) {
+        if (!isValidRomanSystem(romanSystem))
+            return null;
+
+        StringBuilder highestRomanNumber = new StringBuilder();
+        int position = romanSystem.length()-1;
+
+        if (romanSystem.length() % 2 == 0)
+            highestRomanNumber.append(romanSystem.charAt(position--));
+
+        highestRomanNumber.append(String.valueOf(romanSystem.charAt(position)).repeat(MAX_REPEATABLE_SYMBOLS));
+
+        position -= 2;
+        while (position >= 0) {
+            highestRomanNumber.append(romanSystem.charAt(position));
+            highestRomanNumber.append(romanSystem.charAt(position+2));
+            position -= 2;
+        }
+
+        return highestRomanNumber.toString();
     }
 
     private static class RomanNumber {
