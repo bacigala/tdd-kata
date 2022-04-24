@@ -703,4 +703,49 @@ class RomanToArabicTest {
         assertEquals(39999, RomanToArabic.highestIntegerFromRomanSystem("IVXLCDMQF"));
     }
 
+    @Test
+    void maxValueInRomanSystem_SystemLength_10() {
+        assertEquals(89999, RomanToArabic.highestIntegerFromRomanSystem("ABCDEFGHIJ"));
+    }
+
+    @Test
+    void maxValueInRomanSystem_SystemLength_11() {
+        assertEquals(399999, RomanToArabic.highestIntegerFromRomanSystem("ABCDEFGHIJK"));
+    }
+
+    @Test
+    void maxValueInRomanSystem_SystemLength_12() {
+        assertEquals(899999, RomanToArabic.highestIntegerFromRomanSystem("ABCDEFGHIJKL"));
+    }
+
+    @Test
+    void maxValueInRomanSystem_SystemLength_13() {
+        assertEquals(3999999, RomanToArabic.highestIntegerFromRomanSystem("ABCDEFGHIJKLM"));
+    }
+
+    @Test
+    void maxValueInRomanSystem_SystemLength_14() {
+        assertEquals(8999999, RomanToArabic.highestIntegerFromRomanSystem("ABCDEFGHIJKLMN"));
+    }
+
+    @Test
+    void maxValueInRomanSystem_SystemLength_15() {
+        assertEquals(39999999, RomanToArabic.highestIntegerFromRomanSystem("ABCDEFGHIJKLMNO"));
+    }
+
+    @Test
+    void maxValueInRomanSystem_SystemLength_16() {
+        assertEquals(89999999, RomanToArabic.highestIntegerFromRomanSystem("ABCDEFGHIJKLMNOP"));
+    }
+
+    @Test
+    void maxValueInRomanSystem_SystemLength_17() {
+        assertEquals(399999999, RomanToArabic.highestIntegerFromRomanSystem("ABCDEFGHIJKLMNOPQ"));
+    }
+
+    @Test
+    void maxValueInRomanSystem_SystemLength_18() {
+        assertEquals(899999999, RomanToArabic.highestIntegerFromRomanSystem("ABCDEFGHIJKLMNOPQR"));
+    }
+
 }

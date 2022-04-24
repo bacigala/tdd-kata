@@ -2,7 +2,9 @@ import java.util.Collections;
 import java.util.TreeMap;
 
 public class ArabicToRoman {
-    private static final TreeMap<Integer, String> SYMBOL_VALUE = new TreeMap<Integer, String>(Collections.reverseOrder()) {
+    private final static int ROMAN_MINIMUM = 1;
+    private final static int ROMAN_MAXIMUM = 3999;
+    private final static TreeMap<Integer, String> SYMBOL_VALUE = new TreeMap<>(Collections.reverseOrder()) {
         {
             put(1000, "M");
             put(900, "CM");
@@ -21,7 +23,7 @@ public class ArabicToRoman {
     };
 
     public static String convert(int integer) {
-        if (integer <= 0 || integer >= 4000)
+        if (integer < ROMAN_MINIMUM || integer > ROMAN_MAXIMUM)
             return null;
 
         StringBuilder result = new StringBuilder();

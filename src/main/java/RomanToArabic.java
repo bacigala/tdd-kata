@@ -13,20 +13,27 @@ public class RomanToArabic {
     private final static int FAIL = -9999;
 
     private static RomanNumber[] constructRomanOrder(String romanCharacters, int order) {
+        // "romanCharacters" is e.g. "IVX", "XLC", ...
+        final int INDEX_SYMBOL_ONE = 0;
+        final int INDEX_SYMBOL_FIVE = 1;
+        final int INDEX_SYMBOL_HIGHER_ORDER_ONE = 2;
+
         if (romanCharacters == null || romanCharacters.isEmpty())
             return null;
 
         RomanNumber[] result = new RomanNumber[4];
 
-        result[INDEX_ONE] = new RomanNumber(String.valueOf(romanCharacters.charAt(0)), 1, order);
+        result[INDEX_ONE] = new RomanNumber(String.valueOf(romanCharacters.charAt(INDEX_SYMBOL_ONE)), 1, order);
 
         if (romanCharacters.length() > 1) {
-            result[INDEX_FOUR] = new RomanNumber(romanCharacters.substring(0,2), 4, order);
-            result[INDEX_FIVE] = new RomanNumber(String.valueOf(romanCharacters.charAt(1)), 5, order);
+            String four = String.valueOf(romanCharacters.charAt(INDEX_ONE)) + romanCharacters.charAt(INDEX_SYMBOL_FIVE);
+            result[INDEX_FOUR] = new RomanNumber(four, 4, order);
+            result[INDEX_FIVE] = new RomanNumber(String.valueOf(romanCharacters.charAt(INDEX_SYMBOL_FIVE)), 5, order);
         }
 
         if (romanCharacters.length() > 2) {
-            String nine = String.valueOf(romanCharacters.charAt(0)) + romanCharacters.charAt(2);
+            String nine = String.valueOf(romanCharacters.charAt(INDEX_SYMBOL_ONE))
+                    + romanCharacters.charAt(INDEX_SYMBOL_HIGHER_ORDER_ONE);
             result[INDEX_NINE] = new RomanNumber(nine, 9, order);
         }
 
@@ -128,13 +135,13 @@ public class RomanToArabic {
     }
 
     public static int convert(String romanSystem, String str) {
-        ArrayList<RomanNumber[]> romanOrders = constructRomanOrders(romanSystem);
-        if (romanOrders == null || romanOrders.isEmpty())
-            return FAIL;
-
         if (str == null || str.equals(""))
             return FAIL;
         romanInput = str;
+
+        ArrayList<RomanNumber[]> romanOrders = constructRomanOrders(romanSystem);
+        if (romanOrders == null || romanOrders.isEmpty())
+            return FAIL;
 
         int result = 0;
 
