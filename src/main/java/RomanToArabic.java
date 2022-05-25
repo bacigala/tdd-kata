@@ -74,7 +74,7 @@ public class RomanToArabic {
         return true;
     }
 
-    private static boolean isValidRomanSystem(String romanSystem) {
+    public static boolean isValidRomanSystem(String romanSystem) {
         return (romanSystem != null && !romanSystem.isEmpty() && isAlphabetic(romanSystem)
                 && !hasDuplicities(romanSystem) && isUpperCase(romanSystem));
     }
@@ -135,8 +135,14 @@ public class RomanToArabic {
     }
 
     public static int convert(String romanSystem, String str) {
-        if (str == null || str.equals(""))
+
+        if (str == null)
             return FAIL;
+
+        str = str.replaceAll("\\s", "");
+        if (str.equals(""))
+            return FAIL;
+
         romanInput = str;
 
         ArrayList<RomanNumber[]> romanOrders = constructRomanOrders(romanSystem);

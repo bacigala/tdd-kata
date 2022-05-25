@@ -93,4 +93,53 @@ public class RomanCalculator {
         return romanResult;
     }
 
+    public static Result eval(String expression) {
+
+        if (expression == null || expression.isEmpty())
+            return new Result(false, 0);
+
+        // first operand
+        String[] processedFirstNumber = cutStartSequenceOf(SYMBOLS, expression);
+        int firstNumber = RomanToArabic.convert(processedFirstNumber[0]);
+        if (firstNumber == FAIL)
+            return new Result(false, 0);
+        expression = processedFirstNumber[1];
+
+        // operator
+        String[] processedOperator = cutStartSequenceOf(OPERATORS, expression);
+        if (processedOperator[0] == null || processedOperator[0].length() > 1)
+            return new Result(false, 0);
+        char operator = processedOperator[0].charAt(0);
+        expression = processedOperator[1];
+
+        // second operand
+        String[] processedSecondNumber = cutStartSequenceOf(SYMBOLS, expression);
+        int secondNumber = RomanToArabic.convert(processedSecondNumber[0]);
+        if (secondNumber == FAIL)
+            return new Result(false, 0);
+        expression = processedSecondNumber[1];
+
+        // check: was everything parsed?
+        if (expression.length() > 0)
+            return new Result(false, 0);
+
+        // calculate integerResult
+        Integer integerResult = ArabicCalculator.evaluate(firstNumber, secondNumber, operator);
+        if (integerResult == null) {
+            return new Result(false, 0);
+        }
+
+        return new Result(true, integerResult);
+    }
+
+    public static class Result {
+        public boolean hasValidResult;
+        public int result;
+
+        Result(boolean valid, int result) {
+            this.hasValidResult = valid;
+            this.result = result;
+        }
+    }
+
 }
