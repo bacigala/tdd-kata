@@ -1,29 +1,9 @@
-import java.util.Collection;
 import java.util.Collections;
 import java.util.TreeMap;
 
 public class ArabicToRoman {
     private final static int ROMAN_MINIMUM = 1;
     private final static int ROMAN_MAXIMUM = 3999;
-//    private static TreeMap<Integer, String> SYMBOL_VALUE = new TreeMap<>(Collections.reverseOrder()) {
-//        {
-//            put(1000, "M");
-//            put(900, "CM");
-//            put(500, "D");
-//            put(400, "CD");
-//            put(100, "C");
-//            put(90, "XC");
-//            put(50, "L");
-//            put(40, "XL");
-//            put(10, "X");
-//            put(9, "IX");
-//            put(5, "V");
-//            put(4, "IV");
-//            put(1, "I");
-//        }
-//    };
-
-
 
     public static TreeMap<Integer, String> setSystem(String system) {
         TreeMap<Integer, String> newSystem = new TreeMap<>(Collections.reverseOrder());
@@ -36,7 +16,7 @@ public class ArabicToRoman {
 
             if (position + 1 < system.length()) {
                 // 4, 40, 400
-                newSystem.put(order * 4, new StringBuilder().append(system.charAt(position)).append(system.charAt(position+1)).toString());
+                newSystem.put(order * 4, String.valueOf(system.charAt(position)) + system.charAt(position + 1));
 
                 // 5, 50, 500 ...
                 newSystem.put(order * 5, String.valueOf(system.charAt(position+1)));
@@ -44,7 +24,7 @@ public class ArabicToRoman {
 
             if (position + 2 < system.length()) {
                 // 9, 90, 900 ...
-                newSystem.put(order * 9, new StringBuilder().append(system.charAt(position)).append(system.charAt(position+2)).toString());
+                newSystem.put(order * 9, String.valueOf(system.charAt(position)) + system.charAt(position + 2));
             }
 
             order *= 10;
@@ -52,13 +32,6 @@ public class ArabicToRoman {
 
         return newSystem;
     }
-
-
-
-    public static String convert(int integer, int min, int max) {
-        return convert(integer, "IVXLCDM", min, max);
-    }
-
 
     public static String convert(int integer) {
         return convert(integer, "IVXLCDM", ROMAN_MINIMUM, ROMAN_MAXIMUM);

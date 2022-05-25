@@ -24,22 +24,19 @@ public class RomanNumber {
             this.romanSystem = DEFAULT_ROMAN_SYSTEM;
         } else if (max == 1) {
             this.romanSystem = String.valueOf(romanSystem.charAt(0));
-
         }
         if (RomanToArabic.isValidRomanSystem(this.romanSystem) && max < maxNumber(this.romanSystem)) {
             for (int i = 0; i < this.romanSystem.length(); i++) {
                 String newRomanSystem = this.romanSystem.substring(0, this.romanSystem.length() - i);
                 if (RomanToArabic.highestIntegerFromRomanSystem(newRomanSystem) < max) {
                     this.romanSystem = this.romanSystem.substring(0, this.romanSystem.length() - i + 1);
-                    return;
+                    break;
                 } else if (RomanToArabic.highestIntegerFromRomanSystem(newRomanSystem) == max) {
                     this.romanSystem = this.romanSystem.substring(0, this.romanSystem.length() - i);
-                    return;
+                    break;
                 }
-
             }
         }
-
     }
 
     public String romanLetters() {

@@ -12,8 +12,6 @@ public class ArabicCalculator {
             case '/':
                 if (operand2 == 0)
                     return null;
-//                if (operand1 % operand2 != 0)
-//                    return null;
                 return operand1 / operand2;
             default:
                 return null;

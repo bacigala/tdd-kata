@@ -123,8 +123,6 @@ public class RomanCalculator {
         String[] processedSecondNumber = cutStartSequenceOf(symbolList, expression);
         int secondNumber = RomanToArabic.convert(romanSystem, processedSecondNumber[0]);
 
-        // todo
-
         if (secondNumber == FAIL)
             return new Result(false, 0);
         expression = processedSecondNumber[1];
