@@ -72,7 +72,7 @@ public class RomanNumberFull extends RomanNumber {
     }
 
     public boolean calculator(String expression) {
-        RomanCalculator.Result result = RomanCalculator.eval(expression);
+        RomanCalculator.Result result = RomanCalculator.eval(expression, romanSystem.substring(1));
         if (!result.hasValidResult) {
             return false;
         }

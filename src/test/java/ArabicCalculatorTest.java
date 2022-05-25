@@ -152,12 +152,4 @@ public class ArabicCalculatorTest {
         simpleTest(-0,-0,'/', null);
     }
 
-    @Test
-    void fractalResultDivision() {
-        simpleTest(1,2,'/', null);
-        simpleTest(1000,3,'/', null);
-        simpleTest(-1,2,'/', null);
-        simpleTest(-1,-2,'/', null);
-    }
-
 }

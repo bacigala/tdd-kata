@@ -93,14 +93,21 @@ public class RomanCalculator {
         return romanResult;
     }
 
-    public static Result eval(String expression) {
+    public static Result eval(String expression, String romanSystem) {
+
+        ArrayList<Character> symbolList = new ArrayList<>();
+        for (int position = 0; position < romanSystem.length(); position++) {
+            symbolList.add(romanSystem.charAt(position));
+        }
+        symbolList.add('O');
+
 
         if (expression == null || expression.isEmpty())
             return new Result(false, 0);
 
         // first operand
-        String[] processedFirstNumber = cutStartSequenceOf(SYMBOLS, expression);
-        int firstNumber = RomanToArabic.convert(processedFirstNumber[0]);
+        String[] processedFirstNumber = cutStartSequenceOf(symbolList, expression);
+        int firstNumber = RomanToArabic.convert(romanSystem, processedFirstNumber[0]);
         if (firstNumber == FAIL)
             return new Result(false, 0);
         expression = processedFirstNumber[1];
@@ -113,8 +120,11 @@ public class RomanCalculator {
         expression = processedOperator[1];
 
         // second operand
-        String[] processedSecondNumber = cutStartSequenceOf(SYMBOLS, expression);
-        int secondNumber = RomanToArabic.convert(processedSecondNumber[0]);
+        String[] processedSecondNumber = cutStartSequenceOf(symbolList, expression);
+        int secondNumber = RomanToArabic.convert(romanSystem, processedSecondNumber[0]);
+
+        // todo
+
         if (secondNumber == FAIL)
             return new Result(false, 0);
         expression = processedSecondNumber[1];

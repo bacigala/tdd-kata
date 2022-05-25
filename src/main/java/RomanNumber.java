@@ -19,11 +19,27 @@ public class RomanNumber {
     }
 
     public RomanNumber(String romanSystem, int max) {
-        if (!RomanToArabic.isValidRomanSystem(romanSystem) || (max < 1 || max > maxNumber(romanSystem))) {
-            this.romanSystem = "O" + DEFAULT_ROMAN_SYSTEM;
+        this.romanSystem = romanSystem;
+        if (!RomanToArabic.isValidRomanSystem(this.romanSystem) || (max < 1 || max > maxNumber(this.romanSystem)) || this.romanSystem.isEmpty()) {
+            this.romanSystem = DEFAULT_ROMAN_SYSTEM;
+        } else if (max == 1) {
+            this.romanSystem = String.valueOf(romanSystem.charAt(0));
+
+        }
+        if (RomanToArabic.isValidRomanSystem(this.romanSystem) && max < maxNumber(this.romanSystem)) {
+            for (int i = 0; i < this.romanSystem.length(); i++) {
+                String newRomanSystem = this.romanSystem.substring(0, this.romanSystem.length() - i);
+                if (RomanToArabic.highestIntegerFromRomanSystem(newRomanSystem) < max) {
+                    this.romanSystem = this.romanSystem.substring(0, this.romanSystem.length() - i + 1);
+                    return;
+                } else if (RomanToArabic.highestIntegerFromRomanSystem(newRomanSystem) == max) {
+                    this.romanSystem = this.romanSystem.substring(0, this.romanSystem.length() - i);
+                    return;
+                }
+
+            }
         }
 
-        //todo uloha 5
     }
 
     public String romanLetters() {

@@ -143,6 +143,10 @@ public class RomanToArabic {
         if (str.equals(""))
             return FAIL;
 
+        if (str.equals("O")) {
+            return 0;
+        }
+
         romanInput = str;
 
         ArrayList<RomanNumber[]> romanOrders = constructRomanOrders(romanSystem);
@@ -168,9 +172,9 @@ public class RomanToArabic {
     public static int highestIntegerFromRomanSystem(String romanSystem) {
         if (!isValidRomanSystem(romanSystem))
             return FAIL;
-
-        return Integer.parseInt((romanSystem.length() % 2 == 0 ? '8' : '3') +
+        int res = Integer.parseInt((romanSystem.length() % 2 == 0 ? '8' : '3') +
                 "9".repeat(Math.round((float) romanSystem.length() / 2) - 1));
+        return res;
     }
 
     // this actually constructs the highest roman number :)
